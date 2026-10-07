@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 12:14:03 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/06 17:26:59 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/07 12:41:04 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,17 @@ void	stack_push(t_list **lst, t_list *new)
 
 void	print_num(void *n)
 {
-	#include <stdio.h>
-	printf(", %i", *((int *) n));
+	char	*str;
+
+	str = ft_itoa(*((int *) n));
+	ft_putstr_fd(", ", 1);
+	ft_putstr_fd(str, 1);
 }
 
 void	stack_print(t_list *stack)
 {
 	ft_lstiter(stack, &print_num);
+	ft_putchar_fd('\n', 1);
 }
 
 void	swap(t_list **lst)
@@ -70,11 +74,11 @@ void	swap(t_list **lst)
 	stack_push(lst, n2);
 }
 
-void	push(t_list **lst, int n)
+void	push(t_list **lst, int *n)
 {
 	t_list	*new;
 
-	new = ft_lstnew(&n);
+	new = ft_lstnew(n);
 	if (new == NULL)
 		return ;
 	stack_push(lst, new);
@@ -87,6 +91,7 @@ void	rotate(t_list **lst)
 	if (lst == NULL || *lst == NULL)
 		return ;
 	head = stack_pop(lst);
+	head->next = NULL;
 	ft_lstadd_back(lst, head);
 }
 
@@ -108,9 +113,9 @@ t_list	*stack_create(int *nums, int len)
 	if (len == 0)
 		return (NULL);
 	i = 1;
-	stack = ft_lstnew(&nums[0]);
+	stack = ft_lstnew(nums);
 	while (i < len)
-		push(&stack, nums[i++]);
+		push(&stack, &nums[i++]);
 	return (stack);
 }
 
@@ -121,8 +126,10 @@ int	main(void)
 
 	stack = stack_create(nums, 6);
 	stack_print(stack);
-	/*swap(&stack);
+	swap(&stack);
 	stack_print(stack);
 	rotate(&stack);
-	stack_print(stack);*/
+	stack_print(stack);
+	swap(&stack);
+	stack_print(stack);
 }
