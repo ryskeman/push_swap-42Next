@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 12:14:03 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/07 12:41:04 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/08 09:07:43 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,6 @@ t_list	*stack_shift(t_list **lst)
 void	stack_push(t_list **lst, t_list *new)
 {
 	ft_lstadd_front(lst, new);
-}
-
-void	print_num(void *n)
-{
-	char	*str;
-
-	str = ft_itoa(*((int *) n));
-	ft_putstr_fd(", ", 1);
-	ft_putstr_fd(str, 1);
-}
-
-void	stack_print(t_list *stack)
-{
-	ft_lstiter(stack, &print_num);
-	ft_putchar_fd('\n', 1);
 }
 
 void	swap(t_list **lst)
@@ -112,24 +97,9 @@ t_list	*stack_create(int *nums, int len)
 
 	if (len == 0)
 		return (NULL);
-	i = 1;
-	stack = ft_lstnew(nums);
+	i = 0;
+	stack = NULL;
 	while (i < len)
 		push(&stack, &nums[i++]);
 	return (stack);
-}
-
-int	main(void)
-{
-	t_list	*stack;
-	int		nums[6] = {0, 1, 2, 3, 4, 5};
-
-	stack = stack_create(nums, 6);
-	stack_print(stack);
-	swap(&stack);
-	stack_print(stack);
-	rotate(&stack);
-	stack_print(stack);
-	swap(&stack);
-	stack_print(stack);
 }
