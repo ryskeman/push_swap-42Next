@@ -6,7 +6,7 @@
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/10 16:17:11 by fernfern          #+#    #+#             */
-/*   Updated: 2026/10/13 00:27:46 by fernfern         ###   ########.fr       */
+/*   Updated: 2026/10/13 00:57:20 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ static int	parse_flag(const char *arg, t_config *config)
 		config->strategy = STRAT_COMPLEX;
 	else if (ft_strncmp(arg, "--adaptive", 11) == 0)
 		config->strategy = STRAT_ADAPTIVE;
-	else if (ft_strncmp(arg, "--bench", 8) == 0)
-		config->bench = 1;
 	else
 		return (0);
 	return (1);
