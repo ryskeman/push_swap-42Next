@@ -6,7 +6,7 @@
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 17:55:41 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/10 17:37:26 by fernfern         ###   ########.fr       */
+/*   Updated: 2026/10/13 00:12:10 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 /* ENUM TO DEFINE STRATEGIES */
 typedef enum e_strategy
 {
+	STRAT_NONE = -1,
 	STRAT_ADAPTIVE = 0,
 	STRAT_SIMPLE,
 	STRAT_MEDIUM,

@@ -6,7 +6,7 @@
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/10 16:17:11 by fernfern          #+#    #+#             */
-/*   Updated: 2026/10/10 18:32:14 by fernfern         ###   ########.fr       */
+/*   Updated: 2026/10/13 00:27:46 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 
 static int	parse_flag(const char *arg, t_config *config)
 {
+	if (ft_strncmp(arg, "--bench", 8) == 0)
+	{
+		if (config->bench != 0)
+			return (0);
+		config->bench = 1;
+		return (1);
+	}
+	if (config->strategy != STRAT_NONE)
+		return (0);
 	if (ft_strncmp(arg, "--simple", 9) == 0)
 		config->strategy = STRAT_SIMPLE;
 	else if (ft_strncmp(arg, "--medium", 9) == 0)
@@ -98,7 +107,7 @@ int	parsing_input(int ac, char **av, t_config *config)
 	int	i;
 	int	total;
 
-	config->strategy = STRAT_ADAPTIVE;
+	config->strategy = STRAT_NONE;
 	config->bench = 0;
 	config->numbers = NULL;
 	config->size = 0;
@@ -110,8 +119,10 @@ int	parsing_input(int ac, char **av, t_config *config)
 			return (0);
 		i++;
 	}
+	if (config->strategy == STRAT_NONE)
+		config->strategy = STRAT_ADAPTIVE;
 	if (total == 0)
-		return (1);
+		return (0);
 	config->numbers = (int *)malloc(sizeof(int) * total);
 	if (!config->numbers)
 		return (0);
