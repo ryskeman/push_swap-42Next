@@ -6,7 +6,7 @@
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 12:53:25 by fernfern          #+#    #+#             */
-/*   Updated: 2026/10/13 13:48:03 by fernfern         ###   ########.fr       */
+/*   Updated: 2026/10/13 19:14:10 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,26 @@ static long	count_inversions(const int *nums, int size)
 	return (inv);
 }
 
+/* Aux static function to choose final strategy */
+static void	set_metadata(t_strategy og_strat, t_strategy res_strat,
+			t_analysis *analysis)
+{
+	if (og_strat == STRAT_ADAPTIVE)
+		analysis->strategy_name = "Adaptive";
+	else if (res_strat == STRAT_SIMPLE)
+		analysis->strategy_name = "Simple";
+	else if (res_strat == STRAT_MEDIUM)
+		analysis->strategy_name = "Medium";
+	else
+		analysis->strategy_name = "Complex";
+	if (res_strat == STRAT_SIMPLE)
+		analysis->complexity = "O(n)";
+	else if (res_strat == STRAT_MEDIUM)
+		analysis->complexity = "O(n√n)";
+	else
+		analysis->complexity = "O(nlogn)";
+}
+
 /* Calculates disorder scaled ratio (base 10000) */
 int	get_disorder(const int *numbers, int size)
 {
@@ -48,4 +68,26 @@ int	get_disorder(const int *numbers, int size)
 	inv = count_inversions(numbers, size);
 	scaled = ((inv * 10000) + (total_pairs / 2)) / total_pairs;
 	return ((int)scaled);
+}
+
+/* Analyzes input disorder and resolves sorting strategy */
+int	analyze_input(t_config *config, t_analysis *analysis)
+{
+	t_strategy	og_strat;
+
+	if (!config || !analysis || config->numbers == NULL)
+		return (0);
+	og_strat = config->strategy;
+	analysis->disorder = get_disorder(config->numbers, config->size);
+	if (config->strategy == STRAT_ADAPTIVE)
+	{
+		if (analysis->disorder < 2000)
+			config->strategy = STRAT_SIMPLE;
+		else if (analysis->disorder < 5000)
+			config->strategy = STRAT_MEDIUM;
+		else
+			config->strategy = STRAT_COMPLEX;
+	}
+	set_metadata(og_strat, config->strategy, analysis);
+	return (1);
 }
