@@ -6,45 +6,11 @@
 /*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 12:14:03 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/08 09:07:43 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 10:33:29 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stacker.h"
-
-t_list	*stack_pop(t_list **lst)
-{
-	t_list	*node;
-
-	if (lst == NULL || *lst == NULL)
-		return (NULL);
-	node = *lst;
-	*lst = node->next;
-	return (node);
-}
-
-t_list	*stack_shift(t_list **lst)
-{
-	t_list	*node;
-	t_list	*tmp;
-
-	node = *lst;
-	while (node)
-	{
-		if (node->next != NULL && node->next->next == NULL)
-		{
-			tmp = node->next;
-			node->next = NULL;
-		}
-		node = node->next;
-	}
-	return (tmp);
-}
-
-void	stack_push(t_list **lst, t_list *new)
-{
-	ft_lstadd_front(lst, new);
-}
 
 void	swap(t_list **lst)
 {
