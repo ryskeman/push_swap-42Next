@@ -1,16 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stacker_utils.c                                    :+:      :+:    :+:   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 10:33:39 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 10:35:14 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 12:55:07 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stacker.h"
+
+t_list	*stack_create(int *nums, int len)
+{
+	int		i;
+	t_list	*stack;
+
+	if (len == 0)
+		return (NULL);
+	i = len - 1;
+	stack = NULL;
+	while (i >= 0)
+		push(&stack, &nums[i--]);
+	return (stack);
+}
 
 t_list	*stack_pop(t_list **lst)
 {

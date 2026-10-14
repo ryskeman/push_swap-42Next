@@ -3,69 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   stacker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
+/*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/06 12:14:03 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 11:59:05 by jcortes          ###   ########.fr       */
+/*   Created: 2026/10/14 12:56:03 by jcortes           #+#    #+#             */
+/*   Updated: 2026/10/14 13:13:54 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stacker.h"
 
-void	swap(t_list **lst)
+t_list	**create_stacks(int *nums, int len)
 {
-	t_list	*n1;
-	t_list	*n2;
+	t_list	**stacks;
 
-	if (lst == NULL || *lst == NULL || (*lst)->next == NULL)
-		return ;
-	n1 = stack_pop(lst);
-	n2 = stack_pop(lst);
-	stack_push(lst, n1);
-	stack_push(lst, n2);
+	stacks = ft_calloc(2, sizeof(t_list));
+	stacks[0] = stack_create(nums, len);
+	stacks[1] = stack_create(NULL, 0);
+	return (stacks);
 }
 
-void	push(t_list **lst, int *n)
+void	stack_operate(t_operation op, t_list **stacks)
 {
-	t_list	*new;
-
-	new = ft_lstnew(n);
-	if (new == NULL)
-		return ;
-	stack_push(lst, new);
-}
-
-void	rotate(t_list **lst)
-{
-	t_list	*head;
-
-	if (lst == NULL || *lst == NULL)
-		return ;
-	head = stack_pop(lst);
-	head->next = NULL;
-	ft_lstadd_back(lst, head);
-}
-
-void	reverse_rotate(t_list **lst)
-{
-	t_list	*tail;
-
-	if (lst == NULL || *lst == NULL)
-		return ;
-	tail = stack_shift(lst);
-	stack_push(lst, tail);
-}
-
-t_list	*stack_create(int *nums, int len)
-{
-	int		i;
-	t_list	*stack;
-
-	if (len == 0)
-		return (NULL);
-	i = len - 1;
-	stack = NULL;
-	while (i >= 0)
-		push(&stack, &nums[i--]);
-	return (stack);
+	if (op == sa)
+		return (swap(&stacks[0]));
+	if (op == sb)
+		return (swap(&stacks[1]));
+	if (op == ss)
+		return (swap(&stacks[0]), swap(&stacks[1]));
+	if (op == pa)
+		return (stack_push(&stacks[0], stack_pop(&stacks[1])));
+	if (op == pb)
+		return (stack_push(&stacks[1], stack_pop(&stacks[0])));
+	if (op == ra)
+		return (rotate(&stacks[0]));
+	if (op == rb)
+		return (rotate(&stacks[1]));
+	if (op == rr)
+		return (rotate(&stacks[0]), rotate(&stacks[1]));
+	if (op == rra)
+		return (reverse_rotate(&stacks[0]));
+	if (op == rrb)
+		return (reverse_rotate(&stacks[1]));
+	if (op == rrr)
+		return (reverse_rotate(&stacks[0]), reverse_rotate(&stacks[1]));
 }
