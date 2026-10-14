@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 17:02:28 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/08 09:18:50 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 10:35:08 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,9 @@ void	swap(t_list **lst);
 void	push(t_list **lst, int *n);
 void	rotate(t_list **lst);
 void	reverse_rotate(t_list **lst);
+
+t_list	*stack_pop(t_list **lst);
+t_list	*stack_shift(t_list **lst);
+void	stack_push(t_list **lst, t_list *new);
 
 #endif
