@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 12:56:03 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 14:12:57 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 17:19:01 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@ void	fill_state(int *nums, int len, t_state *state)
 {
 	state->a = stack_create(nums, len);
 	state->b = stack_create(NULL, 0);
+}
+
+void	free_state(t_state *state, void (*del)(void *))
+{
+	if (!state)
+		return ;
+	if (state->a)
+		ft_lstclear(&state->a, del);
+	state->a = NULL;
+	if (state->b)
+		ft_lstclear(&state->b, del);
+	state->b = NULL;
 }
 
 void	stack_operate(t_operation op, t_state *state)
@@ -42,6 +54,33 @@ void	stack_operate(t_operation op, t_state *state)
 		return (reverse_rotate(&state->b));
 	if (op == rrr)
 		return (reverse_rotate(&state->a), reverse_rotate(&state->b));
+}
+
+t_operation	get_operation(char *op)
+{
+	if (ft_strncmp(op, "sa", 2) == 0)
+		return (sa);
+	if (ft_strncmp(op, "sb", 2) == 0)
+		return (sb);
+	if (ft_strncmp(op, "ss", 2) == 0)
+		return (ss);
+	if (ft_strncmp(op, "pa", 2) == 0)
+		return (pa);
+	if (ft_strncmp(op, "pb", 2) == 0)
+		return (pb);
+	if (ft_strncmp(op, "ra", 2) == 0)
+		return (ra);
+	if (ft_strncmp(op, "rb", 2) == 0)
+		return (rb);
+	if (ft_strncmp(op, "rr", 2) == 0)
+		return (rr);
+	if (ft_strncmp(op, "rra", 3) == 0)
+		return (rra);
+	if (ft_strncmp(op, "rrb", 3) == 0)
+		return (rrb);
+	if (ft_strncmp(op, "rrr", 3) == 0)
+		return (rrr);
+	return (-1);
 }
 
 int	*export_state(t_state *state)

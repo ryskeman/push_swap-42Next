@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 17:02:28 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 14:43:23 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 17:18:48 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,22 @@ typedef enum e_operation
 }	t_operation;
 
 /* stacker */
-void	fill_state(int *nums, int len, t_state *state);
-void	stack_operate(t_operation op, t_state *state);
-int		*export_state(t_state *state);
+void		fill_state(int *nums, int len, t_state *state);
+void		free_state(t_state *state, void (*del)(void *));
+void		stack_operate(t_operation op, t_state *state);
+t_operation	get_operation(char *op);
+int			*export_state(t_state *state);
 
 /* stack operations */
-void	swap(t_list **lst);
-void	push(t_list **lst, int *n);
-void	rotate(t_list **lst);
-void	reverse_rotate(t_list **lst);
+void		swap(t_list **lst);
+void		push(t_list **lst, int *n);
+void		rotate(t_list **lst);
+void		reverse_rotate(t_list **lst);
 
 /* stacker utils */
-t_list	*stack_create(int *nums, int len);
-t_list	*stack_pop(t_list **lst);
-t_list	*stack_shift(t_list **lst);
-void	stack_push(t_list **lst, t_list *new);
+t_list		*stack_create(int *nums, int len);
+t_list		*stack_pop(t_list **lst);
+t_list		*stack_shift(t_list **lst);
+void		stack_push(t_list **lst, t_list *new);
 
 #endif
