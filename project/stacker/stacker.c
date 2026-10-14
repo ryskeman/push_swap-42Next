@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 12:14:03 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 10:33:29 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 11:59:05 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ t_list	*stack_create(int *nums, int len)
 
 	if (len == 0)
 		return (NULL);
-	i = 0;
+	i = len - 1;
 	stack = NULL;
-	while (i < len)
-		push(&stack, &nums[i++]);
+	while (i >= 0)
+		push(&stack, &nums[i--]);
 	return (stack);
 }
