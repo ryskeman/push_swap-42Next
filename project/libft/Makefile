@@ -48,7 +48,16 @@ SRC = \
 	ft_lstdelone \
 	ft_lstclear \
 	ft_lstiter \
-	ft_lstmap
+	ft_lstmap \
+	get_next_line \
+	ft_printf \
+	ft_printf_parser \
+	print_args \
+	print_chars \
+	print_hex \
+	print_ptr \
+	print_numbers
+
 SRCS = $(addsuffix .c, $(SRC))
 
 OBJ_DIR = ./objs
