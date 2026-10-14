@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 12:56:03 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 17:19:01 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 18:55:42 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	*export_state(t_state *state)
 	{
 		node = stack_pop(&state->a);
 		nums[i++] = *((int *) node->content);
+		free(node);
 	}
 	return (nums);
 }

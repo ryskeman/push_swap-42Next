@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 10:33:39 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 12:55:07 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 18:57:34 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_list	*stack_shift(t_list **lst)
 	t_list	*node;
 	t_list	*tmp;
 
+	tmp = NULL;
 	node = *lst;
 	while (node)
 	{
