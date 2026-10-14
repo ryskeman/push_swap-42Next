@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 13:58:09 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 18:07:10 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 18:30:55 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	do_nothing(void *c)
 	(void) c;
 }
 
-int	soft_exit(t_config *config, t_state *state, int *nums)
+int	soft_exit(t_config *config, t_state *state, int *nums, int print_status)
 {
 	if (config)
 		free_config(config);
@@ -25,7 +25,8 @@ int	soft_exit(t_config *config, t_state *state, int *nums)
 		free_state(state, &do_nothing);
 	if (nums)
 		free(nums);
-	ft_putstr_fd("Error", 2);
+	if (print_status)
+		ft_putendl_fd("Error", 2);
 	return (1);
 }
 
@@ -57,15 +58,17 @@ int	main(int argc, char **argv)
 
 	nums = NULL;
 	if (!parsing_input(argc, argv, &config))
-		return (soft_exit(&config, &state, nums));
+		return (soft_exit(&config, &state, nums, 1));
 	fill_state(config.numbers, config.size, &state);
 	if (!perform_operations(&state))
-		return (soft_exit(&config, &state, nums));
+		return (soft_exit(&config, &state, nums, 1));
 	nums = export_state(&state);
+	if (!nums)
+		return (soft_exit(&config, &state, nums, 1));
 	disorder = get_disorder(nums, config.size);
 	if (disorder == 0)
 		ft_printf("OK\n");
 	else
 		ft_printf("KO\n");
-	return (soft_exit(&config, &state, nums), 0);
+	return (soft_exit(&config, &state, nums, 0), 0);
 }
