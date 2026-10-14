@@ -6,23 +6,27 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 13:58:09 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 15:01:20 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 17:54:38 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-int	soft_exit(void)
+void	do_nothing(void *c)
 {
-	ft_putstr_fd("Error", 2);
-	return (1);
+	(void) c;
 }
 
-t_operation	get_operation(char *op)
+int	soft_exit(t_config *config, t_state *state, int *nums)
 {
-	if (ft_strncmp(op, "sa", 2) == 0)
-		return (sa);
-	return (-1);
+	if (config)
+		free_config(config);
+	if (state)
+		free_state(state, &do_nothing);
+	if (nums)
+		free(nums);
+	ft_putstr_fd("Error", 2);
+	return (1);
 }
 
 int	perform_operations(t_state *state)
@@ -36,11 +40,12 @@ int	perform_operations(t_state *state)
 		if (line == NULL)
 			break ;
 		op = get_operation(line);
+		free(line);
 		if (op == -1)
-			return (free(line), 0);
+			return (0);
 		stack_operate(op, state);
 	}
-	return (free(line), 1);
+	return (1);
 }
 
 int	main(int argc, char **argv)
@@ -51,17 +56,19 @@ int	main(int argc, char **argv)
 	t_config	config;
 	t_state		state;
 
+	nums = NULL;
 	ok = parsing_input(argc, argv, &config);
 	if (!ok)
-		return (soft_exit());
+		return (soft_exit(&config, &state, nums));
 	fill_state(config.numbers, config.size, &state);
 	ok = perform_operations(&state);
 	if (!ok)
-		return (soft_exit());
+		return (soft_exit(&config, &state, nums));
 	nums = export_state(&state);
 	disorder = get_disorder(nums, config.size);
 	if (disorder > 0)
-		ft_putstr_fd("KO", 1);
+		ft_printf("KO\n");
 	else
-		ft_putstr_fd("OK", 1);
+		ft_printf("OK\n");
+	return (soft_exit(&config, &state, nums), 0);
 }
