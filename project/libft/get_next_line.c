@@ -6,11 +6,21 @@
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/03 23:13:27 by fernfern          #+#    #+#             */
-/*   Updated: 2026/10/14 17:42:32 by fernfern         ###   ########.fr       */
+/*   Updated: 2026/10/14 17:10:46 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static char	*join(char *buffer, char *other)
+{
+	char	*tmp;
+
+	tmp = buffer;
+	buffer = ft_strjoin(tmp, other);
+	free(tmp);
+	return (buffer);
+}
 
 static char	*ft_free(char *tmp)
 {
@@ -44,7 +54,7 @@ static char	*ft_reading(int fd, char *buffer)
 			break ;
 		}
 		tmp[readed] = '\0';
-		buffer = ft_strjoin(buffer, tmp);
+		buffer = join(buffer, tmp);
 		if (!buffer)
 			return (ft_free(buffer));
 	}
@@ -67,7 +77,7 @@ static char	*ft_nl(char **buffer)
 		free(*buffer);
 		*buffer = remaining;
 		if (!line)
-			return (ft_free(line));
+			return (ft_free(line), ft_free(remaining));
 	}
 	else
 	{
@@ -90,10 +100,11 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = ft_nl(&buffers[fd]);
 	if (line && line[0] == '\0')
+		return (ft_free(line));
+	if (buffers[fd] && buffers[fd][0] == '\0')
 	{
-		free(line);
-		line = NULL;
-		return (NULL);
+		ft_free(buffers[fd]);
+		buffers[fd] = NULL;
 	}
 	return (line);
 }

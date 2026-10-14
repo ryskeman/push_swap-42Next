@@ -6,7 +6,7 @@
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 17:55:41 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/13 00:12:10 by fernfern         ###   ########.fr       */
+/*   Updated: 2026/10/14 14:41:54 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
-# include "../libft/libft.h"
+# include "../../libft/libft.h"
 
 /* ENUM TO DEFINE STRATEGIES */
 typedef enum e_strategy
