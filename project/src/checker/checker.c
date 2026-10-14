@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 13:58:09 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 18:07:10 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 18:21:51 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	main(int argc, char **argv)
 	if (!perform_operations(&state))
 		return (soft_exit(&config, &state, nums));
 	nums = export_state(&state);
+	if (!nums)
+		return (soft_exit(&config, &state, nums));
 	disorder = get_disorder(nums, config.size);
 	if (disorder == 0)
 		ft_printf("OK\n");
