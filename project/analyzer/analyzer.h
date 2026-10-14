@@ -3,17 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   analyzer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
+/*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 18:01:34 by jcortes           #+#    #+#             */
-/*   Updated: 2026/09/30 18:03:19 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/13 15:55:57 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ANALYZER_H
 # define ANALYZER_H
 
-int		get_disorder(int *stack_a);
-void	put_stats(int *stack_a, char *operations, char flag);
+# include "../libft/libft.h"
+# include "../parser/parser.h"
+
+typedef struct s_analysis
+{
+	int			disorder;
+	const char	*strategy_name;
+	const char	*complexity;
+}	t_analysis;
+
+int	get_disorder(const int *numbers, int size);
+int	analyze_input(t_config *config, t_analysis *analysis);
+//void	put_stats(int *stack_a, char *operations, char flag);
 
 #endif
