@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 17:02:28 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 13:52:42 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 14:07:52 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef enum e_operation
 /* stacker */
 void	fill_state(int *nums, int len, t_state *state);
 void	stack_operate(t_operation op, t_state *state);
+int		*export_state(t_state *state);
 
 /* stack operations */
 void	swap(t_list **lst);
