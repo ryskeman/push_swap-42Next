@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
+/*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 16:21:39 by jcortes           #+#    #+#             */
-/*   Updated: 2026/09/29 09:56:20 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 14:16:42 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+# include <stdarg.h>
 # include <stdlib.h>
 # include <stdint.h>
 # include <unistd.h>
@@ -71,4 +76,36 @@ void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst,	\
 					void *(*f)(void *),	\
 					void (*del)(void *));
+
+char			*get_next_line(int fd);
+char			*ft_free_all(char **str1, char **str2);
+
+/* ft_printf */
+typedef struct s_flags
+{
+	int		minus;
+	int		zero;
+	int		dot;
+	int		precision;
+	int		width;
+	int		hash;
+	int		plus;
+	int		space;
+	char	specifier;
+}		t_flags;
+
+int				ft_putchar_ret(char c, int fd);
+int				print_padding(char c, int len);
+int				get_hex_len(unsigned long n);
+void			put_hex_rec(unsigned long n, const char *base);
+void			parser(char **fmt, t_flags *flags);
+int				format_conversor(char conv, va_list args, t_flags *flags);
+int				print_arg(va_list args, char **fmt);
+int				print_char(int c, t_flags *flags);
+int				print_str(const char *s, t_flags *flags);
+int				print_ptr(void *p, t_flags *flags);
+int				print_int(long n, t_flags *flags);
+int				print_hex(unsigned int n, int uppercase, t_flags *flags);
+int				ft_printf(char const *format, ...);
+
 #endif
