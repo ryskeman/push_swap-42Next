@@ -6,7 +6,7 @@
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 15:37:08 by fernfern          #+#    #+#             */
-/*   Updated: 2026/10/14 17:07:31 by fernfern         ###   ########.fr       */
+/*   Updated: 2026/10/14 19:52:17 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,10 @@
 #include "stacker.h"
 #include "analyzer.h"
 
-/* Function to free nodes memory */
-static void	free_stack_nodes(t_list **lst)
+/* Dummy deleter for ft_lstclear when nodes don't own their content */
+static void	do_nothing(void *c)
 {
-	t_list	*tmp;
-
-	if (!lst || !*lst)
-		return ;
-	while (*lst)
-	{
-		tmp = (*lst)->next;
-		free(*lst);
-		*lst = tmp;
-	}
+	(void)c;
 }
 
 /* Main function */
@@ -34,7 +25,7 @@ int	main(int ac, char **av)
 {
 	t_config	config;
 	t_analysis	analysis;
-	t_list		*stack_a;
+	t_state		state;
 
 	if (ac < 2)
 		return (0);
@@ -44,10 +35,8 @@ int	main(int ac, char **av)
 		return (free_config(&config), write(2, "Error\n", 6), 1);
 	if (analysis.disorder == 0)
 		return (free_config(&config), 0);
-	stack_a = stack_create(config.numbers, config.size);
-	if (!stack_a)
-		return (free_config(&config), write(2, "Error\n", 6), 1);
-	free_stack_nodes(&stack_a);
+	fill_state(config.numbers, config.size, &state);
+	free_state(&state, &do_nothing);
 	free_config(&config);
 	return (0);
 }
