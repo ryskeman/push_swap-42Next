@@ -6,14 +6,14 @@
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 18:01:34 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/13 15:55:57 by fernfern         ###   ########.fr       */
+/*   Updated: 2026/10/14 14:42:10 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ANALYZER_H
 # define ANALYZER_H
 
-# include "../libft/libft.h"
+# include "../../libft/libft.h"
 # include "../parser/parser.h"
 
 typedef struct s_analysis

@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 17:02:28 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 14:07:52 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 14:43:23 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef struct s_state
 
 typedef enum e_operation
 {
-	sa,
+	noop = -1,
+	sa = 0,
 	sb,
 	ss,
 	pa,
