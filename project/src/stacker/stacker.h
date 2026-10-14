@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 17:02:28 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 13:14:24 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/14 13:52:42 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include <stdlib.h>
 # include "../../libft/libft.h"
+
+typedef struct s_state
+{
+	t_list	*a;
+	t_list	*b;
+}	t_state;
 
 typedef enum e_operation
 {
@@ -32,8 +38,8 @@ typedef enum e_operation
 }	t_operation;
 
 /* stacker */
-t_list	**create_stacks(int *nums, int len);
-void	stack_operate(t_operation op, t_list **stacks);
+void	fill_state(int *nums, int len, t_state *state);
+void	stack_operate(t_operation op, t_state *state);
 
 /* stack operations */
 void	swap(t_list **lst);

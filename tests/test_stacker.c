@@ -9,48 +9,48 @@ void	print_num(void *n)
 	ft_putstr_fd(str, 1);
 }
 
-void	stacks_print(t_list **stacks)
+void	print_state(t_state state)
 {
 	ft_putstr_fd("a: ", 1);
-	ft_lstiter(stacks[0], &print_num);
+	ft_lstiter(state.a, &print_num);
 	ft_putchar_fd('\n', 1);
 	ft_putstr_fd("b: ", 1);
-	ft_lstiter(stacks[1], &print_num);
+	ft_lstiter(state.b, &print_num);
 	ft_putstr_fd("\n\n", 1);
 }
 
 int	main(void)
 {
-	t_list	**sts;
+	t_state	state;
 	int		nums[6] = {0, 1, 2, 3, 4, 5};
 
-	sts = create_stacks(nums, 6);
-	stacks_print(sts);
+	fill_state(nums, 6, &state);
+	print_state(state);
 
-	stack_operate(sa, sts);
-	stacks_print(sts);
+	stack_operate(sa, &state);
+	print_state(state);
 
-	stack_operate(ra, sts);
-	stacks_print(sts);
+	stack_operate(ra, &state);
+	print_state(state);
 
-	stack_operate(sa, sts);
-	stacks_print(sts);
+	stack_operate(sa, &state);
+	print_state(state);
 
-	stack_operate(rra, sts);
-	stacks_print(sts);
+	stack_operate(rra, &state);
+	print_state(state);
 
-	stack_operate(pb, sts);
-	stacks_print(sts);
+	stack_operate(pb, &state);
+	print_state(state);
 
-	stack_operate(pb, sts);
-	stacks_print(sts);
+	stack_operate(pb, &state);
+	print_state(state);
 
-	stack_operate(sb, sts);
-	stacks_print(sts);
+	stack_operate(sb, &state);
+	print_state(state);
 
-	stack_operate(pa, sts);
-	stacks_print(sts);
+	stack_operate(pa, &state);
+	print_state(state);
 
-	stack_operate(pa, sts);
-	stacks_print(sts);
+	stack_operate(pa, &state);
+	print_state(state);
 }
