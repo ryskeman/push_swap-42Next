@@ -23,6 +23,8 @@ SRC =   src/analyzer/analyzer \
 		src/stacker/stacker \
 		src/stacker/stack_utils \
 		src/stacker/stack_operations \
+		src/solver/solver \
+		src/solver/bubble_sort \
 		src/bench/bench
 
 SRCS = $(addsuffix .c, $(SRC))

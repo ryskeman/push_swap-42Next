@@ -6,7 +6,7 @@
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 15:37:08 by fernfern          #+#    #+#             */
-/*   Updated: 2026/10/15 13:49:32 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/15 18:49:57 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "stacker.h"
 #include "analyzer.h"
 #include "bench.h"
+#include "solver.h"
 
 /* Dummy deleter for ft_lstclear when nodes don't own their content */
 static void	do_nothing(void *c)
@@ -50,6 +51,7 @@ int	main(int ac, char **av)
 	if (analysis.disorder == 0)
 		return (free_config(&config), 0);
 	fill_state(config.numbers, config.size, &state);
+	solve_sorting(&state, &config);
 	if (config.bench)
 		run_benhcmark(&analysis);
 	free_state(&state, &do_nothing);
