@@ -6,11 +6,13 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 13:58:09 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 18:30:55 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/15 13:13:21 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "parser.h"
+#include "stacker.h"
+#include "analyzer.h"
 
 void	do_nothing(void *c)
 {
@@ -56,6 +58,8 @@ int	main(int argc, char **argv)
 	t_config	config;
 	t_state		state;
 
+	if (argc == 1)
+		return (0);
 	nums = NULL;
 	if (!parsing_input(argc, argv, &config))
 		return (soft_exit(&config, &state, nums, 1));

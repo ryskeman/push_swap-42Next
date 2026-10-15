@@ -1,11 +1,11 @@
 NAME = push_swap
+BONUS = checker
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
 INCLUDES =  -Isrc/analyzer \
-			-Isrc/checker \
 			-Isrc/parser \
 			-Isrc/solver \
 			-Isrc/stacker \
@@ -17,8 +17,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 LIBFT_INCLUDE = -I$(LIBFT_DIR)/
 
-SRC =   src/main \
-		src/analyzer/analyzer \
+SRC =   src/analyzer/analyzer \
 		src/parser/parser \
 		src/parser/parser_utils \
 		src/stacker/stacker \
@@ -31,12 +30,22 @@ SRCS = $(addsuffix .c, $(SRC))
 OBJ_DIR = objs
 OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
+MAIN_OBJ = $(OBJ_DIR)/src/main.o
+BONUS_OBJ = $(OBJ_DIR)/src/checker.o
+
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
+bonus: $(BONUS)
+
+$(NAME): $(LIBFT) $(OBJS) $(MAIN_OBJ)
 	@echo "Linking $(NAME)..."
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(MAIN_OBJ) $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "$(NAME) compiled succesfully!"
+
+$(BONUS): $(LIBFT) $(OBJS) $(BONUS_OBJ)
+	@echo "Linking $(BONUS)..."
+	$(CC) $(CFLAGS) $(BONUS_OBJ) $(OBJS) $(LIBFT) -o $(BONUS)
+	@echo "$(BONUS) compiled succesfully!"
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -62,4 +71,4 @@ fclean: clean
 re: fclean all
 	@echo "Rebuilding project..."
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
