@@ -21,7 +21,9 @@ SRC =   src/main \
 		src/parser/parser \
 		src/parser/parser_utils \
 		src/stacker/stacker \
-		src/stacker/stacker_utils
+		src/stacker/stack_utils \
+		src/stacker/stack_operations 
+
 
 SRCS = $(addsuffix .c, $(SRC))
 

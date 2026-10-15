@@ -6,7 +6,7 @@
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 16:21:39 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 14:16:42 by fernfern         ###   ########.fr       */
+/*   Updated: 2026/10/14 17:45:40 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ t_list			*ft_lstmap(t_list *lst,	\
 					void (*del)(void *));
 
 char			*get_next_line(int fd);
-char			*ft_free_all(char **str1, char **str2);
 
 /* ft_printf */
 typedef struct s_flags

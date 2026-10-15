@@ -50,7 +50,6 @@ SRC = \
 	ft_lstiter \
 	ft_lstmap \
 	get_next_line \
-	get_next_line_utils \
 	ft_printf \
 	ft_printf_parser \
 	print_args \
