@@ -9,6 +9,7 @@ INCLUDES =  -Isrc/analyzer \
 			-Isrc/parser \
 			-Isrc/solver \
 			-Isrc/stacker \
+			-Isrc/bench \
 			-Ilibft
 
 LIBFT_DIR = libft
@@ -22,8 +23,8 @@ SRC =   src/main \
 		src/parser/parser_utils \
 		src/stacker/stacker \
 		src/stacker/stack_utils \
-		src/stacker/stack_operations 
-
+		src/stacker/stack_operations \
+		src/bench/bench
 
 SRCS = $(addsuffix .c, $(SRC))
 
