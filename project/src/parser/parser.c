@@ -6,15 +6,15 @@
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/10 16:17:11 by fernfern          #+#    #+#             */
-/*   Updated: 2026/10/15 13:49:01 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/15 14:51:58 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int	parse_flag(const char *arg, t_config *config, int flags_allowed)
+static int	parse_flag(const char *arg, t_config *config, int allow_flags)
 {
-	if (!flags_allowed)
+	if (!allow_flags)
 		return (0);
 	if (ft_strncmp(arg, "--bench", 8) == 0)
 	{
@@ -39,14 +39,14 @@ static int	parse_flag(const char *arg, t_config *config, int flags_allowed)
 }
 
 /* Count number of elements */
-static int	count_args(char *arg, t_config *config, int *count, int flags_allowed)
+static int	count_args(char *arg, t_config *config, int *count, int allow_flags)
 {
 	char	**tokens;
 	int		i;
 	int		val;
 
 	if (arg[0] == '-' && arg[1] == '-')
-		return (parse_flag(arg, config, flags_allowed));
+		return (parse_flag(arg, config, allow_flags));
 	tokens = ft_split(arg, ' ');
 	if (!tokens || !tokens[0])
 		return (free_split(tokens), 0);
@@ -102,7 +102,7 @@ static int	fill_all(int ac, char **av, t_config *config)
 	return (1);
 }
 
-int	parsing_input(int ac, char **av, t_config *config, int flags_allowed)
+int	parsing_input(int ac, char **av, t_config *config, int allow_flags)
 {
 	int	i;
 	int	total;
@@ -115,7 +115,7 @@ int	parsing_input(int ac, char **av, t_config *config, int flags_allowed)
 	i = 1;
 	while (i < ac)
 	{
-		if (!count_args(av[i], config, &total, flags_allowed))
+		if (!count_args(av[i], config, &total, allow_flags))
 			return (0);
 		i++;
 	}

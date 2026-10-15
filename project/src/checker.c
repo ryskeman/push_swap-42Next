@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 13:58:09 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/15 13:49:24 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/15 15:11:00 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	perform_operations(t_state *state)
 
 int	main(int argc, char **argv)
 {
-	int			disorder;
 	int			*nums;
 	t_config	config;
 	t_state		state;
@@ -61,16 +60,19 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	nums = NULL;
+	state.a = NULL;
+	state.b = NULL;
 	if (!parsing_input(argc, argv, &config, 0))
-		return (soft_exit(&config, &state, nums, 1));
+		return (soft_exit(&config, NULL, NULL, 1));
 	fill_state(config.numbers, config.size, &state);
 	if (!perform_operations(&state))
 		return (soft_exit(&config, &state, nums, 1));
+	if (state.b != NULL)
+		return (ft_printf("KO\n"), soft_exit(&config, &state, nums, 0), 0);
 	nums = export_state(&state);
 	if (!nums)
 		return (soft_exit(&config, &state, nums, 1));
-	disorder = get_disorder(nums, config.size);
-	if (disorder == 0)
+	if (get_disorder(nums, config.size) == 0)
 		ft_printf("OK\n");
 	else
 		ft_printf("KO\n");
