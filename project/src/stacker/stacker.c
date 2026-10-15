@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 12:56:03 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/15 16:06:02 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/15 17:12:11 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,27 +58,27 @@ void	stack_operate(t_operation op, t_state *state)
 
 t_operation	get_operation(char *op)
 {
-	if (ft_strncmp(op, "sa", 2) == 0)
+	if (ft_strcmp(op, "sa\n") == 0)
 		return (sa);
-	if (ft_strncmp(op, "sb", 2) == 0)
+	if (ft_strcmp(op, "sb\n") == 0)
 		return (sb);
-	if (ft_strncmp(op, "ss", 2) == 0)
+	if (ft_strcmp(op, "ss\n") == 0)
 		return (ss);
-	if (ft_strncmp(op, "pa", 2) == 0)
+	if (ft_strcmp(op, "pa\n") == 0)
 		return (pa);
-	if (ft_strncmp(op, "pb", 2) == 0)
+	if (ft_strcmp(op, "pb\n") == 0)
 		return (pb);
-	if (ft_strncmp(op, "rra", 3) == 0)
+	if (ft_strcmp(op, "rra\n") == 0)
 		return (rra);
-	if (ft_strncmp(op, "rrb", 3) == 0)
+	if (ft_strcmp(op, "rrb\n") == 0)
 		return (rrb);
-	if (ft_strncmp(op, "rrr", 3) == 0)
+	if (ft_strcmp(op, "rrr\n") == 0)
 		return (rrr);
-	if (ft_strncmp(op, "ra", 2) == 0)
+	if (ft_strcmp(op, "ra\n") == 0)
 		return (ra);
-	if (ft_strncmp(op, "rb", 2) == 0)
+	if (ft_strcmp(op, "rb\n") == 0)
 		return (rb);
-	if (ft_strncmp(op, "rr", 2) == 0)
+	if (ft_strcmp(op, "rr\n") == 0)
 		return (rr);
 	return (-1);
 }
