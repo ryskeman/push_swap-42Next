@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bench.c                                            :+:      :+:    :+:   */
+/*   bench.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/14 01:41:05 by fernfern          #+#    #+#             */
-/*   Updated: 2026/10/14 01:51:34 by fernfern         ###   ########.fr       */
+/*   Created: 2026/10/14 01:41:10 by fernfern          #+#    #+#             */
+/*   Updated: 2026/10/15 02:27:35 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bench.h"
+#ifndef BENCH_H
+# define BENCH_H
 
-/* IMPRIMIR METRICAS DE DESORDEN */
+# include "../analyzer/analyzer.h"
+# include "../stacker/stacker.h"
+# include "../libft/libft.h"
 
-/* IMPRIMIR CAMPO DE OPERACIONES */
-
-/* Function to print bench in stderr */
-void	print_benchmark(const t_analysis *analysis, const t_bench *bench)
+typedef struct s_bench
 {
-	print();
-}
+	int	ops[11];
+	int	total_ops;
+}	t_bench;
+
+void	bench_init(t_bench *bench);
+void	bench_record(t_bench *bench, t_operation op);
+void	print_benchmark(const t_analysis *analysis, const t_bench *bench);
+
+#endif
