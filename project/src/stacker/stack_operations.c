@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 12:14:03 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 12:51:51 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/15 15:51:14 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	push(t_list **lst, int *n)
 {
 	t_list	*new;
 
+	if (lst == NULL)
+		return ;
 	new = ft_lstnew(n);
 	if (new == NULL)
 		return ;
@@ -53,5 +55,6 @@ void	reverse_rotate(t_list **lst)
 	if (lst == NULL || *lst == NULL)
 		return ;
 	tail = stack_shift(lst);
-	stack_push(lst, tail);
+	if (tail)
+		stack_push(lst, tail);
 }

@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 10:33:39 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 18:57:34 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/15 15:48:39 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_list	*stack_pop(t_list **lst)
 		return (NULL);
 	node = *lst;
 	*lst = node->next;
+	node->next = NULL;
 	return (node);
 }
 
@@ -42,17 +43,15 @@ t_list	*stack_shift(t_list **lst)
 	t_list	*node;
 	t_list	*tmp;
 
-	tmp = NULL;
+	if (lst == NULL || *lst == NULL)
+		return (NULL);
 	node = *lst;
-	while (node)
-	{
-		if (node->next != NULL && node->next->next == NULL)
-		{
-			tmp = node->next;
-			node->next = NULL;
-		}
+	if (node->next == NULL)
+		return (NULL);
+	while (node->next->next != NULL)
 		node = node->next;
-	}
+	tmp = node->next;
+	node->next = NULL;
 	return (tmp);
 }
 
