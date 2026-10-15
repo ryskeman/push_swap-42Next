@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 12:26:08 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/15 17:10:03 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/15 17:14:11 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (s1[i] != '\0' && s2[i] != '\0')
 	{
