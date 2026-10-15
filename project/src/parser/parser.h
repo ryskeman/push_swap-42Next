@@ -6,7 +6,7 @@
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 17:55:41 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 14:41:54 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/15 13:49:12 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_config
 }	t_config;
 
 /* parser.c */
-int		parsing_input(int ac, char **av, t_config *config);
+int		parsing_input(int ac, char **av, t_config *config, int flags_allowed);
 
 /* parser_utils.c */
 void	free_config(t_config *config);

@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 13:58:09 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/15 13:13:21 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/15 13:49:24 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	nums = NULL;
-	if (!parsing_input(argc, argv, &config))
+	if (!parsing_input(argc, argv, &config, 0))
 		return (soft_exit(&config, &state, nums, 1));
 	fill_state(config.numbers, config.size, &state);
 	if (!perform_operations(&state))

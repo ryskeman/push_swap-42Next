@@ -6,7 +6,7 @@
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 15:37:08 by fernfern          #+#    #+#             */
-/*   Updated: 2026/10/15 02:45:08 by fernfern         ###   ########.fr       */
+/*   Updated: 2026/10/15 13:49:32 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int ac, char **av)
 
 	if (ac < 2)
 		return (0);
-	if (!parsing_input(ac, av, &config))
+	if (!parsing_input(ac, av, &config, 1))
 		return (write(2, "Error\n", 6), 1);
 	if (!analyze_input(&config, &analysis))
 		return (free_config(&config), write(2, "Error\n", 6), 1);
