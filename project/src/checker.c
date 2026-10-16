@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "stacker.h"
-#include "analyzer.h"
+#include "parser/parser.h"
+#include "stacker/stacker.h"
+#include "analyzer/analyzer.h"
 
 void	do_nothing(void *c)
 {

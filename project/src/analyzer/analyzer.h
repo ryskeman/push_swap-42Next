@@ -25,6 +25,5 @@ typedef struct s_analysis
 
 int	get_disorder(const int *numbers, int size);
 int	analyze_input(t_config *config, t_analysis *analysis);
-//void	put_stats(int *stack_a, char *operations, char flag);
 
 #endif

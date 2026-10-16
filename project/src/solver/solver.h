@@ -16,6 +16,7 @@
 # include "../parser/parser.h"
 # include "../stacker/stacker.h"
 # include "../analyzer/analyzer.h"
+# include "../bench/bench.h"
 # include "../../libft/libft.h"
 
 void	do_operation(char *op, t_state *state);
@@ -23,8 +24,8 @@ void	solve_sorting(t_state *state, t_config *config);
 void	solve_two(t_state *state);
 void	solve_three(t_state *state);
 
-void	bubble_sort(t_state *state, int size);
-void	solve_medium(t_state *state, int size);
-void	merge_sort(t_state *state, int size);
+void	bubble_sort(t_state *state, int size, int in_stack_a);
+void	solve_medium(t_state *state, int size, int in_stack_a);
+void	merge_sort(t_state *state, int size, int in_stack_a);
 
 #endif

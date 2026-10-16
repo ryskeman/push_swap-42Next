@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "stacker.h"
-#include "analyzer.h"
-#include "bench.h"
-#include "solver.h"
+#include "parser/parser.h"
+#include "stacker/stacker.h"
+#include "analyzer/analyzer.h"
+#include "bench/bench.h"
+#include "solver/solver.h"
 
 /* Dummy deleter for ft_lstclear when nodes don't own their content */
 static void	do_nothing(void *c)
