@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stacker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 12:56:03 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/15 17:12:11 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/16 14:13:31 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	fill_state(int *nums, int len, t_state *state)
 {
 	state->a = stack_create(nums, len);
 	state->b = stack_create(NULL, 0);
+	state->bench = NULL;
 }
 
 void	free_state(t_state *state, void (*del)(void *))
