@@ -30,12 +30,6 @@ void	solve_medium(t_state *state, int size)
 	bubble_sort(state, size);
 }
 
-void	solve_complex(t_state *state, int size)
-{
-	// SOLUCION DUMMY PROVISIONAL
-	bubble_sort(state, size);
-}
-
 void	solve_sorting(t_state *state, t_config *config)
 {
 	if (config->size <= 1)
@@ -49,6 +43,5 @@ void	solve_sorting(t_state *state, t_config *config)
 	if (config->strategy == STRAT_MEDIUM)
 		return (solve_medium(state, config->size));
 	if (config->strategy == STRAT_COMPLEX)
-		return (solve_complex(state, config->size));
-	bubble_sort(state, config->size); // Dummy para aceptar casos sin flags
+		return (merge_sort(state, config->size));
 }

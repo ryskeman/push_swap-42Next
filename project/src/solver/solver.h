@@ -25,6 +25,6 @@ void	solve_three(t_state *state);
 
 void	bubble_sort(t_state *state, int size);
 void	solve_medium(t_state *state, int size);
-void	solve_complex(t_state *state, int size);
+void	merge_sort(t_state *state, int size);
 
 #endif
