@@ -12,19 +12,18 @@
 
 #include "solver.h"
 
-static void	swaps(t_state *state, int in_stack_a)
+static void	swaps(t_state *state)
 {
 	int	sa;
 	int	sb;
 
 	sa = *((int *) state->a->content) > *((int *) state->a->next->content);
 	sb = *((int *) state->b->content) < *((int *) state->b->next->content);
-	// if (sa && sb)
-	// 	do_operation("ss\n", state);
-	// else if (sa)
-	if (in_stack_a && sa)
+	if (sa && sb)
+		do_operation("ss\n", state);
+	else if (sa)
 		do_operation("sa\n", state);
-	else if (!in_stack_a && sb)
+	else if (sb)
 		do_operation("sb\n", state);
 }
 
@@ -50,29 +49,41 @@ static void	merge(t_state *state, int this_size, int other_size, int in_stack_a)
 	reverse_count = 0;
 	while (other_size > 0)
 	{
-		while (in_stack_a && *((int *) state->a->content) < *((int *) state->b->content) && reverse_count < this_size)
+		while (*((int *) state->a->content) < *((int *) state->b->content) && reverse_count < this_size)
 		{
-			do_operation("ra\n", state);
+			if (in_stack_a)
+				do_operation("ra\n", state);
+			else
+				do_operation("rb\n", state);
 			reverse_count++;
 		}
-		while (!in_stack_a && *((int *) state->b->content) > *((int *) state->a->content) && reverse_count < this_size)
+		/*while (other_size > 0 && *((int *) state->a->content) > *((int *) state->b->content))
 		{
-			do_operation("rb\n", state);
-			reverse_count++;
+			if (in_stack_a)
+				do_operation("pa\n", state);
+			else
+				do_operation("pb\n", state);
+			other_size--;
 		}
+		while (other_size > 0 && reverse_count == this_size)
+		{
+			if (in_stack_a)
+				do_operation("pa\n", state);
+			else
+				do_operation("pb\n", state);
+			other_size--;
+		}*/
 		if (in_stack_a)
 			do_operation("pa\n", state);
 		else
 			do_operation("pb\n", state);
 		other_size--;
-		while (in_stack_a && reverse_count > 0)
+		while (reverse_count > 0)
 		{
-			do_operation("rra\n", state);
-			reverse_count--;
-		}
-		while (!in_stack_a && reverse_count > 0)
-		{
-			do_operation("rrb\n", state);
+			if (in_stack_a)
+				do_operation("rra\n", state);
+			else
+				do_operation("rrb\n", state);
 			reverse_count--;
 		}
 	}
@@ -85,7 +96,7 @@ void	merge_sort(t_state *state, int size, int in_stack_a)
 	if (size == 1)
 		return ;
 	if (size == 2)
-		return (swaps(state, in_stack_a));
+		return (swaps(state));
 	other_size = size / 2;
 	split_in_half(state, other_size, in_stack_a);
 	merge_sort(state, other_size, (in_stack_a + 1) % 2);
