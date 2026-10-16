@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bubble_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 18:36:59 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/15 19:05:11 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/16 11:56:05 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,42 @@ void	bubble_sort(t_state *state, int size)
 		do_operation("pa\n", state);
 		n++;
 	}
+}
+
+void	solve_two(t_state *state)
+{
+	int	first;
+	int	second;
+
+	first = *((int *)state->a->content);
+	second = *((int *)state->a->next->content);
+	if (first > second)
+		do_operation("sa\n", state);
+}
+
+void	solve_three(t_state *state)
+{
+	int	first;
+	int	second;
+	int	third;
+
+	first = *((int *)state->a->content);
+	second = *((int *)state->a->next->content);
+	third = *((int *)state->a->next->next->content);
+	if (first > second && second < third && first < third)
+		do_operation("sa\n", state);
+	else if (first > second && second > third)
+	{
+		do_operation("sa\n", state);
+		do_operation("rra\n", state);
+	}
+	else if (first > second && second < third && first > third)
+		do_operation("ra\n", state);
+	else if (first < second && second > third && first < third)
+	{
+		do_operation("sa\n", state);
+		do_operation("ra\n", state);
+	}
+	else if (first < second && second > third && first > third)
+		do_operation("rra\n", state);
 }
