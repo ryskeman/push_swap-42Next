@@ -68,6 +68,7 @@ clean:
 fclean: clean
 	@echo "Deep cleaning project executable..."
 	$(RM) $(NAME)
+	$(RM) $(BONUS)
 	@echo "Deep cleaning libft archive..."
 	@make -C $(LIBFT_DIR) fclean
 
