@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stacker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
+/*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 17:02:28 by jcortes           #+#    #+#             */
-/*   Updated: 2026/10/14 17:18:48 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/10/16 14:11:21 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 # include <stdlib.h>
 # include "../../libft/libft.h"
 
+typedef struct s_bench	t_bench;
+
 typedef struct s_state
 {
 	t_list	*a;
 	t_list	*b;
+	t_bench	*bench;
 }	t_state;
 
 typedef enum e_operation
