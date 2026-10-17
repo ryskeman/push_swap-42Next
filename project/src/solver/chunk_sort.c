@@ -6,91 +6,93 @@
 /*   By: fernfern <fernfern@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/16 16:27:47 by fernfern          #+#    #+#             */
-/*   Updated: 2026/10/17 02:51:23 by fernfern         ###   ########.fr       */
+/*   Updated: 2026/10/17 20:52:37 by fernfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solver.h"
 
-/* Get maximum number position*/
-int	get_max_pos(t_list *stack)
+/* Calculates chunk aprox size */
+static int	calculate_size_chunk(int size)
 {
-	int	max_val;
-	int	max_pos;
-	int	i;
+	int	chunk;
 
-	if (!stack)
-		return (-1);
-	i = 0;
-	max_pos = 0;
-	max_val = (*(int *)stack->content);
-	while (stack)
-	{
-		if ((*(int *)stack->content) > max_val)
-		{
-			max_val = *(int *)stack->content;
-			max_pos = i;
-		}
-		stack = stack->next;
-		i++;
-	}
-	return (max_pos);
+	chunk = (size * 5) / 100 + 10;
+	if (chunk > 35)
+		chunk = 35;
+	if (chunk < 5)
+		chunk = 5;
+	return (chunk);
 }
 
-/*
-// 1. DEFINICIÓN DE BLOQUES
-// Queremos saber qué rango de valores aceptamos ahora mismo.
-size_chunk = calculate_size_chunk(size) // Ej: size / 6
-limit_sup = size_chunk
+/* 1. BLOCK DEFINITION: Filtering from A to B */
+static void	push_chunks_to_b(t_state *state, int *sorted, int size)
+{
+	int	size_chunk;
+	int	limit_sup;
+	int	num_top;
+	int	idx;
 
-	while (*(int *)stack->content)
+	size_chunk = calculate_size_chunk(size);
+	limit_sup = size_chunk;
+	while (state->a)
 	{
-	    num_top = value_on top_a();
-
-    // CASO A: El número está dentro del bloque actual
-	if (num_top <= sorted[limit_sup]);
-		do_operation(pb);
-        
-        // Optimización clave (para que B quede con forma de donut):
-        // Si además el número es de la mitad inferior de ese mismo bloque:
-		 if (num_top <= sorted[limit_sup - (size_chunk / 2)])
-			do_operation(rb); // Lo mandamos al fondo de B
-            
-        // Si ya hemos mandado a B suficientes números como para llenar este bloque,
-        // ampliamos el límite al siguiente bloque:
-        SI tamanyo_de_B >= limite_superior Y limite_superior + tamanyo_chunk < size:
-            limit_sup = limit_sup + size_chunk;
-
-    // CASO B: El número es más grande que el bloque actual
-	else
-		do_operation(ra); // No nos sirve todavía; lo rotamos para buscar otro
+		num_top = *(int *)state->a->content;
+		idx = limit_sup - 1;
+		if (idx >= size)
+			idx = size - 1;
+		if (num_top <= sorted[idx])
+		{
+			do_operation("pb\n", state);
+			if (num_top <= sorted[limit_sup - (size_chunk / 2)])
+				do_operation("rb\n", state);
+			if ((int)ft_lstsize(state->b) >= limit_sup)
+			{
+				limit_sup += size_chunk;
+				if (limit_sup > size)
+					limit_sup = size;
+			}
+		}
+		else
+			do_operation("ra\n", state);
 	}
-*/
+}
 
-/*
-	A se ha quedado vacía. B tiene todos los números, pero no están mezclados al azar:
-	los más pequeños de todos están al fondo de $B$, los medianos por en medio, y los
-	más grandes arriba del todo.
-*/
+/* 2. GREEDY EXTRACTION: Push back sorted from B to A */
+static void	sorted_chunks_to_a(t_state *state)
+{
+	int	max_pos;
+	int	updated_b_size;
+	int	steps;
 
-/*
-MIENTRAS la pila B no esté vacía:
-    // 1. Localizar el elemento con el valor más alto que queda en B
-    posicion_del_maximo = buscar_posicion_del_maximo_en_B()
-    tamanyo_actual_B = longitud_de_B()
+	while (state->b)
+	{
+		max_pos = get_max_pos(state->b);
+		updated_b_size = ft_lstsize(state->b);
+		if (max_pos <= updated_b_size / 2)
+		{
+			while (max_pos-- > 0)
+				do_operation("rb\n", state);
+		}
+		else
+		{
+			steps = updated_b_size - max_pos;
+			while (steps-- > 0)
+				do_operation("rrb\n", state);
+		}
+		do_operation("pa\n", state);
+	}
+}
 
-    // 2. Llevar ese máximo a la cima de B por el camino más corto
-    SI posicion_del_maximo <= (tamanyo_actual_B / 2):
-        // Está en la mitad superior: rotar hacia arriba
-        REPETIR posicion_del_maximo VECES:
-            EJECUTAR(rb)
-    SINO:
-        // Está en la mitad inferior: rotar hacia abajo (reverse rotate)
-        pasos = tamanyo_actual_B - posicion_del_maximo
-        REPETIR pasos VECES:
-            EJECUTAR(rrb)
+/* Medium algorithm sorting CHUNK_SORT */
+void	chunk_sort(t_state *state, t_config *config)
+{
+	int	*sorted;
 
-    // 3. Ya está en el tope de B: lo devolvemos a A
-    EJECUTAR(pa)
-FIN MIENTRAS
-*/
+	sorted = get_sorted_copy(config->numbers, config->size);
+	if (!sorted)
+		return ;
+	push_chunks_to_b(state, sorted, config->size);
+	sorted_chunks_to_a(state);
+	free(sorted);
+}
