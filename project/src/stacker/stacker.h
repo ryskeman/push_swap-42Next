@@ -14,9 +14,8 @@
 # define STACKER_H
 
 # include <stdlib.h>
+# include "../bench/bench.h"
 # include "../../libft/libft.h"
-
-typedef struct s_bench	t_bench;
 
 typedef struct s_state
 {
@@ -24,22 +23,6 @@ typedef struct s_state
 	t_list	*b;
 	t_bench	*bench;
 }	t_state;
-
-typedef enum e_operation
-{
-	noop = -1,
-	sa = 0,
-	sb,
-	ss,
-	pa,
-	pb,
-	ra,
-	rb,
-	rr,
-	rra,
-	rrb,
-	rrr
-}	t_operation;
 
 /* stacker */
 void		fill_state(int *nums, int len, t_state *state);

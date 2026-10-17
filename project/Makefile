@@ -25,6 +25,7 @@ SRC =   src/analyzer/analyzer \
 		src/stacker/stack_operations \
 		src/solver/solver \
 		src/solver/bubble_sort \
+		src/solver/merge_sort \
 		src/bench/bench
 
 SRCS = $(addsuffix .c, $(SRC))
@@ -67,6 +68,7 @@ clean:
 fclean: clean
 	@echo "Deep cleaning project executable..."
 	$(RM) $(NAME)
+	$(RM) $(BONUS)
 	@echo "Deep cleaning libft archive..."
 	@make -C $(LIBFT_DIR) fclean
 

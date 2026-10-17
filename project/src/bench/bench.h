@@ -14,8 +14,23 @@
 # define BENCH_H
 
 # include "../analyzer/analyzer.h"
-# include "../stacker/stacker.h"
-# include "../libft/libft.h"
+# include "../../libft/libft.h"
+
+typedef enum e_operation
+{
+	noop = -1,
+	sa = 0,
+	sb,
+	ss,
+	pa,
+	pb,
+	ra,
+	rb,
+	rr,
+	rra,
+	rrb,
+	rrr
+}	t_operation;
 
 typedef struct s_bench
 {

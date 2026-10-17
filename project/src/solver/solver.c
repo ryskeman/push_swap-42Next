@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "solver.h"
-#include "bench.h"
 
 void	do_operation(char *op, t_state *state)
 {
@@ -24,16 +23,10 @@ void	do_operation(char *op, t_state *state)
 		bench_record(state->bench, operation);
 }
 
-void	solve_medium(t_state *state, int size)
+void	solve_medium(t_state *state, int size, int in_stack_a)
 {
 	// SOLUCION DUMMY PROVISIONAL
-	bubble_sort(state, size);
-}
-
-void	solve_complex(t_state *state, int size)
-{
-	// SOLUCION DUMMY PROVISIONAL
-	bubble_sort(state, size);
+	bubble_sort(state, size, in_stack_a);
 }
 
 void	solve_sorting(t_state *state, t_config *config)
@@ -45,10 +38,9 @@ void	solve_sorting(t_state *state, t_config *config)
 	if (config->size == 3)
 		return (solve_three(state));
 	if (config->strategy == STRAT_SIMPLE)
-		return (bubble_sort(state, config->size));
+		return (bubble_sort(state, config->size, 1));
 	if (config->strategy == STRAT_MEDIUM)
-		return (solve_medium(state, config->size));
+		return (solve_medium(state, config->size, 1));
 	if (config->strategy == STRAT_COMPLEX)
-		return (solve_complex(state, config->size));
-	bubble_sort(state, config->size); // Dummy para aceptar casos sin flags
+		return (merge_sort(state, config->size, 1));
 }
